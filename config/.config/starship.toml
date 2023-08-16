@@ -1,0 +1,336 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+right_format =  " $aws $python "
+# format = "󰥭"
+format = "$all"
+
+[character]
+error_symbol = "[✖](bold red) "
+
+#[character]
+#success_symbol = "[λ](green)"
+#error_symbol = "[λ](red)"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "blue"
+read_only = " "
+read_only_style = "fg:#ffb86c"
+truncation_symbol = ""
+home_symbol = "~"
+format = "[$path]($style)[$read_only]($read_only_style) "
+#format = "[$path]($style)[$lock_symbol]($lock_style) "
+
+[docker_context]
+format = "via [🐋 $context](blue bold)"
+symbol = " "
+
+#[aws]
+#symbol = "  "
+#format = "on [$symbol$region]($style) "
+#style = "bold blue"
+
+[aws]
+disabled = true
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+# format = '[$symbol$profile(\($region\))]($style) '
+#style = "bold blue"
+style = "bold yellow"
+symbol = "☁️  "
+# symbol = "  "
+[aws.region_aliases]
+# eu-west-1 = "ew1"
+# us-west-1 = "uw1"
+# us-west-2 = "uw2"
+us-east-1 = "ue1"
+# us-east-2 = "ue2"
+[aws.profile_aliases]
+
+
+# [elm]
+# symbol = " "
+
+#[git_status]
+#format = '([$all_status$ahead_behind]($style) )'
+## ahead = "[⇡${count}](7)"
+#ahead = "⇡ $count "
+#behind = "⇣ $count "
+#diverged = "[⇕⇡${ahead_count}⇣${behind_count}](7)"
+## behind = "[⇣${count}](7)"
+#modified = "[!](red) "
+#deleted = "[](red) "
+#untracked = "[?](yellow) "
+#staged = "[+](green) "
+#renamed = "➜ "
+#style = "green"
+
+[git_status]
+# disabled = true
+# style = "bg:#E0B25D fg:#000000"
+style = "green"
+stashed = " ${count}"
+ahead = "󰜷 ${count}"
+behind = "󰜮 ${count}"
+diverged = "󰹺 ${ahead_count} ${behind_count}"
+conflicted = "[$](red){count}"
+renamed = " [](purple) [${count}](purple)"
+deleted = " 󰆴 ${count}"
+modified = " [󰧮](yellow) [${count}](yellow)"
+staged = " 󰧮 ${count}"
+untracked = " [󰧮](red) [${count}](red)"
+format = '([$all_status$ahead_behind]($style) )'
+
+[git_branch]
+truncation_length = 12
+truncation_symbol = "⋯ "
+only_attached = false
+format = "on [$symbol$branch]($style) "
+symbol = " "
+# symbol = " "
+# style = "bold yellow"
+style = "bold blue"
+
+[git_commit]
+commit_hash_length = 8
+style = "bold white"
+#
+# [golang]
+# symbol = " "
+
+[hg_branch]
+symbol = " "
+style =	"bold purple"
+format = "on [$symbol$branch]($style) "
+
+# [java]
+# symbol = " "
+#
+# [julia]
+# symbol = " "
+#
+
+#
+# [perl]
+# symbol = " "
+#
+# [php]
+# symbol = " "
+
+[python]
+format = " [$symbol$version]($style) "
+pyenv_version_name = true
+style = "bold yellow"
+symbol = " "
+
+# [ruby]
+# symbol = " "
+#
+# [rust]
+# symbol = " "
+#
+# [scala]
+# symbol = " "
+#
+
+[azure]
+disabled = true
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "🔌"
+discharging_symbol = "⚡"
+disabled = false
+
+[[battery.display]]
+threshold = 30
+style = "bold red"
+
+[cmake]
+disabled = true
+
+[cmd_duration]
+disabled = true
+
+[cobol]
+disabled = true
+
+[conda]
+# symbol = " "
+disabled = true
+
+[container]
+disabled = true
+
+[crystal]
+disabled = true
+
+[dart]
+symbol = " "
+disabled = true
+
+[dotnet]
+disabled = true
+
+[deno]
+disabled = true
+
+[elixir]
+symbol = " "
+disabled = true
+
+[elm]
+disabled = true
+
+[env_var]
+disabled = true
+
+[erlang]
+disabled = true
+
+[fill]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_metrics]
+disabled = true
+
+[golang]
+disabled = true
+
+[helm]
+disabled = true
+
+[hostname]
+ssh_only = false
+format = "<[$hostname]($style)󰥭"
+trim_at = "-"
+style = "bold dimmed white"
+disabled = true
+
+[java]
+disabled = true
+
+[jobs]
+disabled = true
+
+[julia]
+disabled = true
+
+[kotlin]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[line_break]
+disabled = false
+
+[localip]
+disabled = true
+
+[lua]
+disabled = true
+
+[memory_usage]
+symbol = " "
+format = "$symbol[${ram}( | ${swap})]($style) "
+threshold = 70
+style = "bold dimmed white"
+disabled = true
+
+[nim]
+symbol = " "
+disabled = true
+
+[nix_shell]
+symbol = " "
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ocaml]
+disabled = true
+
+[openstack]
+disabled = true
+
+[package]
+symbol = " "
+disabled = true
+
+[perl]
+disabled = true
+
+[php]
+disabled = true
+
+[pulumi]
+disabled = true
+
+[purescript]
+disabled = true
+
+[rlang]
+disabled = true
+
+[ruby]
+disabled = true
+
+[rust]
+disabled = true
+
+[scala]
+disabled = true
+
+[shell]
+disabled = true
+
+[shlvl]
+symbol = " "
+disabled = true
+
+[singularity]
+disabled = true
+
+[status]
+disabled = true
+
+[sudo]
+disabled = false
+
+[swift]
+symbol = "ﯣ "
+disabled = true
+
+[terraform]
+disabled = true
+
+[time]
+disabled = true
+
+[username]
+# disabled = false
+show_always = true
+style_user = "767676"
+
+[vagrant]
+disabled = true
+
+[vlang]
+disabled = true
+
+[vcsh]
+disabled = true
+
+[zig]
+disabled = true

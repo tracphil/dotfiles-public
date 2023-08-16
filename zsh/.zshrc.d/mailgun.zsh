@@ -1,0 +1,2 @@
+
+export MAILGUN_SENDING_KEY=""

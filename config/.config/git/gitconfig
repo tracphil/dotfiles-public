@@ -1,0 +1,106 @@
+# vim: set ft=gitconfig:
+
+[core]
+  editor = vim
+[init]
+  defaultBranch = main
+[help]
+  # Automatically correct and execute mistyped commands after waiting for the given number of deci-seconds (0.1 sec).
+  autocorrect = 30
+  # Override the default help format used by `git help`.
+  format = man
+[gpg]
+  program = gpg
+
+
+[column]
+  ui = never
+[color]
+  # Determines the default value for variables such as `color.diff` and `color.grep` that control the use of color per command family.
+  ui = auto
+[color "branch"]
+  current = yellow bold
+  local   = green bold
+  remote  = cyan bold
+[color "diff"]
+  meta       = yellow bold
+  frag       = magenta bold
+  old        = red bold
+  new        = green bold
+  whitespace = red reverse
+[color "status"]
+  added     = green bold
+  changed   = yellow bold
+  untracked = red bold
+
+[log]
+  showSignature = true
+
+[branch]
+  sort = committerdate
+
+[merge]
+  # Controls which merge tool is used by git-merge.
+  tool = vimdiff
+[push]
+  # Push should only push current branch, not all branches.
+  default = current
+  # Enable `--follow-tags` option by default.
+  followTags = true
+[pull]
+  rebase = true
+[filter "lfs"]
+  clean    = git-lfs clean -- %f
+  smudge   = git-lfs smudge -- %f
+  process  = git-lfs filter-process
+  required = true
+
+
+[alias]
+  today = log --since=midnight --color --graph \
+              --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
+               --abbrev-commit
+  yesterday = log --since yesterday --until=midnight --color --graph \
+            --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' \
+            --abbrev-commit
+  graph = log --graph --abbrev-commit --decorate --all \
+              --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) \
+              - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)'
+  history = log --graph --pretty=format:'%C(yellow)%h%Creset \
+                -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' \
+                --abbrev-commit --date=short --date-order -n30
+
+  remotes  = remote -v
+  branches = branch -a
+
+  # Clean up local git branches that are tracking remote branches that no longer exist.
+  gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' \
+         | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
+
+  fetch-pr = "!f(){\
+      [ -z \"$1\" ] && { echo Usage: git fetch-pr PULL_REQUEST_ID [REMOTE_NAME] [NEW_BRANCH_NAME]; exit 1; }; \
+      remote=${2:-origin}; \
+      branch=${3:-pr-$1}; \
+      git fetch $remote \"pull/$1/head:$branch\"; \
+      }; f "
+  pr = "!f(){\
+      branch=${3:-pr-$1}; \
+      git fetch-pr \"$@\"; \
+      git switch $branch; \
+      }; f "
+
+  ci = commit -s
+
+# Include external gitconfig file (requires git 1.7.10+).
+# Typically, user.name and user.email is configured.
+[include]
+  path = ~/.config/git/user.default.gitconfig
+
+[includeIf "gitdir:~/Projects/mantoso/"]
+  path = ~/.config/git/project.mantoso.gitconfig
+
+[includeIf "gitdir:~/Projects/pml/"]
+  path = ~/.config/git/project.pml.gitconfig
+
+[includeIf "gitdir:~/Projects/mntv/"]
+  path = ~/.config/git/project.mntv.gitconfig

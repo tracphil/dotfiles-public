@@ -1,0 +1,3 @@
+# Global requirements
+github-archive
+ansible

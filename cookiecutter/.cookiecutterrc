@@ -1,0 +1,2 @@
+abbreviations:
+    gh: git+ssh://git@github.com/{0}.git

@@ -1,0 +1,13 @@
+# vim: set ft=gitconfig:
+# project.mantoso.gitconfig
+
+[user]
+  name = Tracy Phillips
+  email = tracphil@mantoso.com
+  signingKey = FA2DC60859D036E7
+
+[commit]
+  gpgsign = true
+
+[push]
+  gpgsign = if-asked

@@ -1,0 +1,56 @@
+---
+
+stages:
+  - compliance
+  - lint
+  - build
+  - test
+  - deploy
+  - release
+
+
+workflow:
+  rules:
+    - if: '$CI_MERGE_REQUEST_EVENT_TYPE == "detached"'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+    - when: always
+
+variables:
+  DOCKER_DRIVER: overlay2
+
+compliance:dco:
+  image: christophebedard/dco-check:latest
+  stage: compliance
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_EXTERNAL_PULL_REQUEST_IID
+    - if: $CI_COMMIT_BRANCH == 'main'
+  script:
+    - pip3 install -U dco-check  # optional
+    - dco-check
+
+lint:commit:
+  image: node:19-bullseye-slim
+  stage: lint
+  before_script:
+    - npm install -g @commitlint/cli @commitlint/config-conventional
+  script:
+    - echo "${CI_COMMIT_MESSAGE}" | npx commitlint
+
+release:
+  image: node:19-bullseye-slim
+  stage: release
+  before_script:
+    - DEBIAN_FRONTEND="noninteractive"
+    - apt-get update && apt-get install -y --no-install-recommends git-core ca-certificates
+    - npm install -g semantic-release @semantic-release/gitlab @semantic-release/git @semantic-release/changelog @semantic-release/exec @semantic-release/release-notes-generator @semantic-release/commit-analyzer conventional-changelog-conventionalcommits
+  script:
+    - npx semantic-release
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  variables:
+    GITLAB_TOKEN: $GITLAB_ACCESS_TOKEN
+
+...

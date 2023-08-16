@@ -1,0 +1,127 @@
+[ui]
+username = tracphil <tracphil@outlook.com>
+
+tweakdefaults = true
+
+[defaults]
+commit = -v
+
+
+[auth]
+rcdev.prefix = code.server.com
+rcdev.username = username
+rcdev.password = set-pw
+
+
+[diff]
+git = 1
+showfunc = 1
+unified = 8
+
+
+[alias]
+cherry-pick = graft
+latest = log --limit 5
+pull = pull --rebase
+push-all = push
+push = push --rev .
+amend = commit --amend
+
+# Commit message shortcuts.
+cm = commit -m
+cus = commit -m 'Update subrepository state.'
+cmm = commit -m 'Merge.'
+cb = commit -m 'Close branch.' --close-branch
+
+# Kaleidoscope
+# Mnemonics: "kaleidoscope diff" and "kaleidoscope show"
+kd = !/opt/local/bin/hg ksdiff $@
+ks = !/opt/local/bin/hg ksdiff -c $@
+
+# Make a new repo with some sensible defaults.
+mkrepo = !$HG init $1 && cd $1 && \
+          echo "[paths]\n" >> .hg/hgrc \
+          echo 'syntax: glob'  > .hgignore && \
+          echo ''             >> .hgignore && \
+          echo '.env'         >> .hgignore && \
+          echo '.out'         >> .hgignore && \
+          echo '*.pyc'        >> .hgignore && \
+          echo '*.swp'        >> .hgignore && \
+          echo '*.swo'        >> .hgignore && \
+          echo '*.un~'        >> .hgignore && \
+          echo '.ansible'     >> .hgignore && \
+          echo '.idea'        >> .hgignore && \
+          echo '.ropeproject' >> .hgignore && \
+          echo '.vscode'      >> .hgignore && \
+          echo '.venv'        >> .hgignore && \
+          echo '.DS_Store'    >> .hgignore && \
+          echo 'tags'         >> .hgignore && \
+          echo '*.sublime-workspace' >> .hgignore && \
+
+
+[extensions]
+bookmarks =
+color =
+fsmonitor =
+graphlog =
+histedit =
+# largefiles =
+mq =
+pager =
+progress =
+purge =
+rebase =
+shelve =
+show =
+hgext.churn =
+hgext.extdiff =
+
+
+[extdiff]
+cmd.ksdiff = /usr/local/bin/ksdiff
+opts.ksdiff = --changeset --wait --filelist
+
+
+[ui]
+merge = Kaleidoscope
+
+
+[merge-tools]
+Kaleidoscope.executable = /usr/local/bin/ksdiff
+Kaleidoscope.args = --merge --output $output --base $base -- $local $other
+
+
+[largefiles]
+patterns = re:.*\.(png|bmp|jpg|zip|tar|tar.gz|rar)$
+minsize = 10
+
+
+[progress]
+delay = 1.5
+
+
+[bookmarks]
+track.current = True
+
+
+[color]
+status.modified = cyan
+status.added = green
+status.removed = red
+status.deleted = yellow bold underline
+status.unknown = magenta bold underline
+status.ignored = black bold
+custom.rev = yellow
+custom.author = bold
+custom.book = green
+custom.branch = red bold underline
+custom.date = underline
+changeset.draft = yellow
+changeset.public = green
+
+
+[pager]
+pager = LESS='FSRX' less
+
+
+[hostfingerprints]
